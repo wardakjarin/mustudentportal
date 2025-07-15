@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/auth';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -9,7 +9,7 @@ const Login = () => {
     dob: ''
   });
   const { setAuthTokens } = useAuth();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const { studentId, dob } = formData;
 
@@ -20,11 +20,12 @@ const Login = () => {
     try {
       const res = await axios.post('/api/auth/login', formData);
       setAuthTokens(res.data.token);
-      history.push('/dashboard');
+      navigate('/dashboard');
     } catch (err) {
       console.error(err.response.data);
     }
   };
+
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">

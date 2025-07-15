@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/auth';
 import LoadingSpinner from './LoadingSpinner';
@@ -11,7 +11,7 @@ const DetailedMarks = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { authTokens } = useAuth();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -44,7 +44,7 @@ const DetailedMarks = () => {
               {details.course.code}: {details.course.title.toUpperCase()} - DETAILED MARKS
             </h1>
             <button 
-              onClick={() => history.push(`/results/${semester}`)}
+              onClick={() => navigate(`/results/${semester}`)}
               className="bg-white text-blue-800 px-3 py-1 rounded-md text-sm font-medium hover:bg-gray-100 transition"
             >
               Back to Results

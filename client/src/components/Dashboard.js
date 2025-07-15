@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/auth';
 import LoadingSpinner from './LoadingSpinner';
@@ -12,7 +12,7 @@ const Dashboard = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { authTokens, logout } = useAuth();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDashboardData = async () => {
@@ -73,12 +73,12 @@ const Dashboard = () => {
                 <QuickLink 
                   icon="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
                   text="View Results"
-                  onClick={() => history.push('/results')}
+                  onClick={() => navigate('/results')}
                 />
                 <QuickLink 
                   icon="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
                   text="Course Schedule"
-                  onClick={() => history.push('/schedule')}
+                  onClick={() => navigate('/schedule')}
                 />
                 {/* Add other quick links */}
               </div>
@@ -106,7 +106,7 @@ const Dashboard = () => {
               <div className="flex justify-between items-center mb-4">
                 <h2 className="text-lg font-semibold text-gray-800">FALL 2023 - PROPOSED COURSES (SEMESTER {student.currentSemester + 1})</h2>
                 <button 
-                  onClick={() => history.push('/upcoming-courses')}
+                  onClick={() => navigate('/upcoming-courses')}
                   className="text-sm bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition"
                 >
                   View Details

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/auth';
 import LoadingSpinner from './LoadingSpinner';
@@ -12,7 +12,7 @@ const SemesterResults = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { authTokens } = useAuth();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchResults = async () => {
@@ -43,7 +43,7 @@ const SemesterResults = () => {
           <div className="flex justify-between items-center">
             <h1 className="text-xl font-bold">SPRING 2025 RESULTS - SEMESTER {semester}</h1>
             <button 
-              onClick={() => history.push('/dashboard')}
+              onClick={() => navigate('/dashboard')}
               className="bg-white text-blue-800 px-3 py-1 rounded-md text-sm font-medium hover:bg-gray-100 transition"
             >
               Back to Dashboard
@@ -82,7 +82,7 @@ const SemesterResults = () => {
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <button 
-                        onClick={() => history.push(`/results/${semester}/${result.course.code}`)}
+                        onClick={() => navigate(`/results/${semester}/${result.course.code}`)}
                         className="text-blue-600 hover:text-blue-800 transition"
                       >
                         View Details

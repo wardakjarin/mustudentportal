@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/auth';
 import PrivateRoute from './components/PrivateRoute';
 import Login from './components/Login';
@@ -13,15 +13,15 @@ function App() {
   return (
     <AuthProvider>
       <Router>
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/dashboard" component={Dashboard} />
-          <PrivateRoute exact path="/results" component={SemesterResults} />
-          <PrivateRoute exact path="/results/:courseCode" component={DetailedMarks} />
-          <PrivateRoute exact path="/retakes" component={RetakeInfo} />
-          <PrivateRoute exact path="/courses" component={UpcomingCourses} />
-          <PrivateRoute exact path="/" component={Dashboard} />
-        </Switch>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/dashboard" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
+          <Route path="/results/:semester" element={<PrivateRoute><SemesterResults /></PrivateRoute>} />
+          <Route path="/results/:semester/:courseCode" element={<PrivateRoute><DetailedMarks /></PrivateRoute>} />
+          <Route path="/retakes" element={<PrivateRoute><RetakeInfo /></PrivateRoute>} />
+          <Route path="/courses" element={<PrivateRoute><UpcomingCourses /></PrivateRoute>} />
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+        </Routes>
       </Router>
     </AuthProvider>
   );

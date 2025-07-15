@@ -1,7 +1,7 @@
 import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import setAuthToken from '../utils/setAuthToken';
+import setAuthToken from '../utils/SetAuthToken';
 
 const AuthContext = createContext();
 
@@ -11,15 +11,15 @@ export function AuthProvider({ children }) {
   );
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const logout = useCallback(() => {
     localStorage.removeItem('tokens');
     setAuthTokens(null);
     setCurrentUser(null);
     setAuthToken(null);
-    history.push('/login');
-  }, [history]);
+    navigate('/login');
+  }, [navigate]);
 
   const fetchUser = useCallback(async () => {
     try {
@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
     setAuthTokens(token);
     setAuthToken(token);
     await fetchUser();
-    history.push('/dashboard');
+    navigate('/dashboard');
   };
 
   return (
