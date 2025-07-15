@@ -1,7 +1,6 @@
 import React from 'react';
 
 const StatusBadge = ({ status }) => {
-  // Simple badge for status, customize as needed
   const color = status === 'Pass' ? 'green' : status === 'Fail' ? 'red' : 'gray';
   return (
     <span style={{

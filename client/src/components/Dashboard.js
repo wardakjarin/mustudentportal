@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from '../context/auth';
 import LoadingSpinner from './LoadingSpinner';
@@ -36,7 +36,7 @@ const Dashboard = () => {
   if (loading) return <LoadingSpinner />;
   if (error) return <div className="text-red-500 text-center mt-8">{error}</div>;
 
-  const { student, upcomingCourses, recentResults, notices } = dashboardData;
+  const { student, upcomingCourses, notices } = dashboardData;
 
   return (
     <div className="min-h-screen bg-gray-50">
